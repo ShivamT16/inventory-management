@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Routes, Route, NavLink} from "react-router-dom"
+
+import { Inventory } from './Pages/Inventory';
+import { Sales } from './Pages/Sales';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <nav>
+        <h1>Inventory Management</h1>
+        <NavLink className="link" to="/">Inventory</NavLink>
+        <NavLink className="link" to="/sales">Sales</NavLink>
+        <NavLink></NavLink>
+        </nav>
+        <Routes>
+        <Route path="/" element={<Inventory />} />
+        <Route path="/sales" element={<Sales />} />
+        <Route />
+        </Routes>
+      </Router>
     </div>
   );
 }
