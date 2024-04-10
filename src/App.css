@@ -16,3 +16,6 @@ nav{
   font-size: x-large;
   color: white
 }
+button{
+  cursor: pointer;
+}
