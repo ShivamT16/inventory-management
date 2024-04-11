@@ -15,6 +15,9 @@
     font-size: 1.2rem;
     align-items: center;
 }
+.labelP{
+    width: 5rem;
+}
 .input{
     margin: 1rem 1rem 1rem 0.5rem;
     font-size: 1rem;
@@ -33,6 +36,9 @@ table{
 }
 th {
     border-bottom: 1px solid black;
+}
+.action-btn{
+    margin: 0rem 0.4rem
 }
 
 @media screen and (max-width: 900px) {

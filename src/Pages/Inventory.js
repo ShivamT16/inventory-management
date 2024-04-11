@@ -93,6 +93,7 @@ export const Inventory = () => {
             </div>
             {button ? <button className="submit-btn" onClick={handleUpdateInventory}>Update Inventory</button> : <button className="submit-btn" disabled={ check ? true : false} onClick={handleInventory} >Add To Inventory</button>}
             {button && <button className="submit-btn" onClick={handleCancelButton} >Cancel</button>}
+
         </form>
         <div>
         <h2>Inventory Report</h2>
@@ -114,7 +115,8 @@ export const Inventory = () => {
                             <td>{quantity}</td>
                             <td>{category}</td>
                             <td>{price}</td>
-                            <td><button onClick={() => dispatch(deleteInventory(_id))} >Delete</button>
+                            <td>
+                            <button className="action-btn" onClick={() => dispatch(deleteInventory(_id))} >Delete</button>
                             <button onClick={() => handleUpdate(_id)}>Update</button>
                             </td>
                         </tr>   

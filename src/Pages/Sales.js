@@ -64,6 +64,7 @@ export const Sales = () => {
             </div>
             <button className="submit-btn" onClick={handleSales} >Add To Sales</button>
         </form>
+        <h2>Sales History by Date range-</h2>
         <div className="label">
             <form>
                 <label>From- </label>
@@ -88,11 +89,10 @@ export const Sales = () => {
                 <td>{quantity}</td>
                 <td>{price}</td>
                 <td>{price * quantity}</td>
-                {createdAt.slice(0,10)}
             </tr> )
             }
         </table>
-        <h3>Total Revenue: ${sales.filter((item) => true ? item.createdAt.slice(0,10) >= dates.from && item.createdAt.slice(0,10) <= dates.to : item).reduce((acc, curr) => curr.quantity * curr.price + acc,0 )} </h3>
+        <h3>Total Revenue: ${sales.filter((item) => dates.from !== "" && dates.to !== "" ? item.createdAt.slice(0,10) >= dates.from && item.createdAt.slice(0,10) <= dates.to : item).reduce((acc, curr) => curr.quantity * curr.price + acc,0 )} </h3>
         </div>
         </div>
     )
