@@ -103,3 +103,5 @@ export const addSales = (newEntry) => async (dispatch) => {
         dispatch({type: "ADD_ENTRY_FAILURE"})
     }
 }
+
+

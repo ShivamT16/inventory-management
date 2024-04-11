@@ -26,7 +26,7 @@
 }
 table{
     border: 2px solid forestgreen;
-    width: 900px;
+    width: 800px;
     height: 200px;
     padding: 0rem 0.5rem;
     margin: 1rem 0rem;
@@ -34,3 +34,9 @@ table{
 th {
     border-bottom: 1px solid black;
 }
+
+@media screen and (max-width: 900px) {
+    table{
+        width: max-content;
+    }
+  }

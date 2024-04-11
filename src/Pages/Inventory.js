@@ -42,15 +42,32 @@ export const Inventory = () => {
         quantity:findItem.quantity,
         category:findItem.category,
         price:findItem.price
-    })
+    }) 
     setButton(true)
     }
 
-    const handleUpdateInventory = (e) => {
-        e.preventDefault()
+    const handleUpdateInventory = () => {
         dispatch(updateInventory(newInventory));
+        setNewInventory({
+            name:"",
+            quantity:"",
+            category:"",
+            price:""
+        })
         setButton(false)
     }
+    
+    const handleCancelButton = () => {
+        setNewInventory({
+            name:"",
+            quantity:"",
+            category:"",
+            price:""
+        })
+        setButton(false)
+    }
+
+    const check = !newInventory.name.length || !newInventory.quantity.length || !newInventory.category.length || !newInventory.price.length
 
     return(
         <div className="main">
@@ -74,7 +91,8 @@ export const Inventory = () => {
             <input className="input" type="number" autoComplete="off" value={newInventory.price} name="price" onChange={handleNewInventory} />
             </div>
             </div>
-            {button ? <button className="submit-btn" onClick={handleUpdateInventory}>Update Inventory</button> : <button className="submit-btn" onClick={handleInventory} >Add To Inventory</button>}
+            {button ? <button className="submit-btn" onClick={handleUpdateInventory}>Update Inventory</button> : <button className="submit-btn" disabled={ check ? true : false} onClick={handleInventory} >Add To Inventory</button>}
+            {button && <button className="submit-btn" onClick={handleCancelButton} >Cancel</button>}
         </form>
         <div>
         <h2>Inventory Report</h2>
@@ -88,7 +106,7 @@ export const Inventory = () => {
                     <th>Quantity</th>
                     <th>Category</th>
                     <th>Price ($)</th>
-                    <th>Delete</th>
+                    <th>Operations</th>
                 </tr>
             {inventory.filter(({category}) => category.includes(search)).map(({_id,name,quantity,category,price}) => 
                 <tr key={_id}>

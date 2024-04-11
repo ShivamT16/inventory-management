@@ -11,7 +11,9 @@ export const Sales = () => {
         quantity: "",
         price: "",
     })
- 
+
+    const [dates, setDates] = useState({from:"", to:""})
+
     useEffect(() =>
      {dispatch(fetchSales())}, [dispatch])
 
@@ -29,6 +31,17 @@ export const Sales = () => {
             quantity: "",
             price: "",
         })
+    }
+
+    const handleDate = (e) => {
+       const name = e.target.name;
+       const value = e.target.value
+       setDates({...dates,[name]: value})
+    }
+
+    const handleDates = (e) => {
+     e.preventDefault()
+     setDates({from:"", to:""})
     }
 
     return(
@@ -51,6 +64,15 @@ export const Sales = () => {
             </div>
             <button className="submit-btn" onClick={handleSales} >Add To Sales</button>
         </form>
+        <div className="label">
+            <form>
+                <label>From- </label>
+                <input className="input" type="date" value={dates.from} name="from" onChange={handleDate} />
+                <label>To- </label>
+                <input className="input" type="date" value={dates.to} name="to" onChange={handleDate} />
+                <button onClick={handleDates} >Clear Search</button>
+            </form>
+        </div>
         <div>
         <table>
                 <tr>
@@ -60,16 +82,17 @@ export const Sales = () => {
                     <th>Revenue ($)</th>
                 </tr>
             {
-            sales.map(({_id,description,quantity,price}) => 
+            sales.filter((item) => dates.from !== "" && dates.to !== "" ? item.createdAt.slice(0,10) >= dates.from && item.createdAt.slice(0,10) <= dates.to : item).map(({_id,description,quantity,price,createdAt}) => 
             <tr key={_id}>
                 <td>{description}</td>
                 <td>{quantity}</td>
                 <td>{price}</td>
                 <td>{price * quantity}</td>
+                {createdAt.slice(0,10)}
             </tr> )
             }
         </table>
-        <h3>Total Revenue: ${sales.reduce((acc, curr) => curr.quantity * curr.price + acc,0 )} </h3>
+        <h3>Total Revenue: ${sales.filter((item) => true ? item.createdAt.slice(0,10) >= dates.from && item.createdAt.slice(0,10) <= dates.to : item).reduce((acc, curr) => curr.quantity * curr.price + acc,0 )} </h3>
         </div>
         </div>
     )
